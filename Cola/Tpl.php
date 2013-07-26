@@ -13,6 +13,7 @@ class Cola_Tpl {
 	
 	static private  $tpl_path = 'views/tpl_c';
 	
+	
 	static function parse_code($tag_code, $tag_id, $tag_type = 'tag') {
 		 
 		$tplfile = 'db/' . $tag_type . '_' . $tag_id;
@@ -38,7 +39,6 @@ class Cola_Tpl {
 		//read
 		if (! is_file( $tplfile )) {
 			throw  new Cola_Exception($tplfile.'文件不存在！');
-		
 		}
 		
 		$template = Cola_Tpl::sreadfile ( $tplfile );
@@ -252,7 +252,9 @@ class Cola_Tpl {
 	public static function widget_out($c,$a){
 	    $c = "Controllers_$c";
 	    $cls_name = new $c;
-	    return call_user_func(array($cls_name,$a));
+	    if(method_exists($cls_name, $a)){
+	        return call_user_func(array($cls_name,$a));
+	    }
 	}
 	/**
 	 * 文字裁剪

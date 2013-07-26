@@ -15,6 +15,9 @@ class Controllers_Index extends Cola_Controller
             
         Cola_Request::isAjax();
         
+         
+        
+        
         $this->display('Index/index');
         
        // $this->view()->display('view.php','views/Index');
@@ -44,6 +47,8 @@ class Controllers_Index extends Cola_Controller
         //$res = $model->testModel();
         
         //var_dump($res);
+        
+        
         
        
         

@@ -4,6 +4,9 @@ class Models_Index extends Cola_Model
 {
 
     
+    function set_cache(){
+        
+    }
     
     function test ()
     {
