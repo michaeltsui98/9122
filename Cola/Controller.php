@@ -117,7 +117,7 @@ class Cola_Controller
         $this->view->url = $url;
         $this->view->message = $message;
         $this->view->ms = $ms;
-        $this->display('Index/message');
+        $this->display('public/message');
         exit;
     }
 
