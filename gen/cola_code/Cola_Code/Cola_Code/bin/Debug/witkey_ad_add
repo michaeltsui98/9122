@@ -1,0 +1,29 @@
+<!--{include control/admin/tpl/admin_header}-->
+<div class="page_title">
+	<h1>witkey_ad</h1>
+	<div class="tool"> 
+		<a href="{BASE_URL}/index.php/admin/witkey_ad" {if $_K['action'] != 'add'}class="here"{/if}>{$_lang['list']}</a>
+		<a href="{BASE_URL}/index.php/admin/witkey_ad/add" {if $_K['action'] == 'add'}class="here"{/if}>{if $ad_name}{$_lang['edit']}{else}{$_lang['add']}{/if}</a>
+	</div>
+</div>
+<div class="box post detail">
+<form method="post" action="{BASE_URL}/index.php/admin/witkey_ad/save" onsubmit="return checkForm(this)" id="frm_witkey_ad" enctype="multipart/form-data">
+	<input type="hidden" name="hdn_ad_name" value="{$info['ad_name']}">
+	<input type="hidden" name="formhash" value="{FORMHASH}"/>
+	<table  border="0" cellspacing="0" cellpadding="0">
+
+	<tr>
+		<th scope="row"></th>
+		<td>
+			<button type="submit" name="sbt_edit"  value={$_lang['submit']}/>
+			{$_lang['submit']}
+			</button>
+			<button type="button" name="rst_edit" value={$_lang['return']} onclick="history.back(-1)">
+			{$_lang['return']}
+			</button>
+		</td>
+	</tr>
+	</table>
+</form>
+</div>
+<!--{include control/admin/tpl/admin_footer}-->

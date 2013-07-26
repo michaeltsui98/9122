@@ -1,0 +1,13 @@
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\bin\Debug\Cola_Code.exe.config
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\Cola_Code.Properties.Resources.resources
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\Cola_Code.csproj.GenerateResource.Cache
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\php.AboutBox1.resources
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\php.DBupdate.resources
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\php.Form1.resources
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\php.User.resources
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\bin\Debug\Cola_Code.exe
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\bin\Debug\Cola_Code.pdb
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\bin\Debug\MySql.Data.dll
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\Cola_Code.csprojResolveAssemblyReference.cache
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\Cola_Code.exe
+F:\Microsoft\cola_code\Cola_Code\Cola_Code\obj\Debug\Cola_Code.pdb
