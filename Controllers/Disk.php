@@ -37,7 +37,9 @@ class Controllers_Disk extends Cola_Controller
     }
     function widget(){
         $this->view->a = '这个王八蛋';
-        
+        $dm = new Models_Disk();
+        $res = $dm->get_log();
+        $this->view->res = $res;
         $this->display('index/wid');
     }
     

@@ -6,7 +6,7 @@ mb_internal_encoding ( 'utf-8' );
 define ( 'DEBUG', TRUE );
 header ( "Content-Type:text/html;charset=utf-8" );
 define('S_ROOT', __DIR__.DIRECTORY_SEPARATOR);
-define('BASE_PATH', '/df');
+define('BASE_PATH', '/9122');
 require 'Cola/Cola.php';
 $cola = Cola::getInstance ();
 
