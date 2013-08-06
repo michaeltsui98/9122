@@ -33,7 +33,7 @@ $config = array(
     ),
     '_xhprof' => array(
             'logDir' => 'D:\KKserv\wwwroot\xhprof\xhprof_log',
-            'namespace' => 'df',
+            'namespace' => '9122',
             'viewUrl' => 'http://localhost/xhprof/xhprof_html/index.php',
     ),
 
