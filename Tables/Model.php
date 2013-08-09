@@ -233,7 +233,7 @@ class Tables_Model
      * @param string $url  BASE_PATH."/index.php/Admin_Log/index/page/%page%/fid/$fid/cond/$cond/val/$val";
      * @return boolean|multitype:string Ambigous <mixed, resource>
      */
-    public function sql_pager ($sql, $page, $limit, $url)
+    public function sql_pager ($sql, $page, $limit, $url,$ajax=0)
     {
         (int) $page or $page = 1;
         (int) $limit or $limit = 20;
@@ -246,7 +246,7 @@ class Tables_Model
         $sql = "select count(*) from (" . $sql . ") as sy";
         $count = self::$db->col($sql);
         
-        $pager = new Cola_Com_Pager($page, $limit, $count, $url);
+        $pager = new Cola_Com_Pager($page, $limit, $count, $url,$ajax);
         $html = $pager->html();
         if (! $data)
             return false;

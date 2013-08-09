@@ -19,6 +19,20 @@ class Cola_Com_Pager
         'page' => '<a href="%link%">%page%</a>',
         'suffix' => '</div>'
     );
+    
+    protected $_ajax_config = array(
+        'prevNums' => 2,
+        'nextNums' => 7,
+        'showSinglePage' => false,
+        'prefix' => '<style type="text/css">.pages{float:right;font-size:12px;} .pages *{border:1px solid #E6E7E1;height:24px;line-height:24px;padding:3px 6px;margin:1px;color:#0099CC;} .pages b{background-color:#0099CC;border-color:#0099CC;color:#FFFFFF;} .pages a {text-decoration:none;} .pages a:hover{border-color:#0099CC;} .pn{border-color:#0099CC;}</style><div class="pages">',
+        'first' => '<a href="javascript:void();" onclick="ajax_page(this);" data-url="%link%">%page%...</a>',
+        'last' => '<a href="javascript:void();" onclick="ajax_page(this);" data-url="%link%">...%page%</a>',
+        'prev' => '<a class="pn" href="javascript:void();" onclick="ajax_page(this);" data-url="%link%" >&lt;&lt;</a>',
+        'next' => '<a class="pn" href="javascript:void();" onclick="ajax_page(this);" data-url="%link%">&gt;&gt;</a>',
+        'current' => '<b>%page%</b>',
+        'page' => '<a href="javascript:void();" onclick="ajax_page(this);" data-url="%link%">%page%</a>',
+        'suffix' => '</div>'
+    );
     public $curPage = 1;
     public $pageSize = 20;
     public $totalItems;
@@ -26,6 +40,7 @@ class Cola_Com_Pager
     public $totalPages;
     public $startPage;
     public $endPage;
+    public $ajaxPage=0;
 
     /**
      * Constructor
@@ -35,13 +50,17 @@ class Cola_Com_Pager
      * @param int $totalItems
      * @param string $url
      */
-    public function __construct($curPage = 1, $pageSize = 20, $totalItems, $url = '')
+    public function __construct($curPage = 1, $pageSize = 20, $totalItems, $url = '',$ajax=0)
     {
         $this->curPage = intval($curPage);
         $this->pageSize = intval($pageSize);
         $this->totalItems = intval($totalItems);
         $this->url = $url;
-
+        $this->ajaxPage = $ajax;
+        if($ajax==1){
+            //如果ajax分页，则用ajax配置
+            $this->_config = $this->_ajax_config;
+        }
         $this->_init();
     }
 

@@ -67,18 +67,35 @@ class Cola_View
         include $file;
         return ob_get_clean();
     }
-    
+    /**
+     * 
+     * @param string $tpl  子模板文件
+     * @param string $dir 母板文件
+     * @return string
+     */
     protected function _render($tpl, $dir = null)
     {
         //if (null === $dir) $dir = $this->_basePath;
     
         //if ($dir) $dir = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR;
+        $isajax = Cola_Request::isAjax();
         ob_start();
         ob_implicit_flush(0);
         //$file = $dir . $tpl;
         $view = (array)$this;
+        $view['_tpl'] = $tpl;
+        $view['_dir'] = $dir;
         extract($view);
-        include Cola_Tpl::template($tpl);
+        if($isajax){
+            include Cola_Tpl::template($tpl);
+        }else{
+            if($dir!==null){
+                include Cola_Tpl::template($dir);
+            }else{
+                include Cola_Tpl::template($tpl);
+            } 
+        }
+        
         return ob_get_clean();
     }
 

@@ -93,7 +93,6 @@ class Cola_Controller
     protected function display($tpl = null, $dir = null)
     {
         if (empty($tpl)) $tpl = $this->defaultTemplate();
-
         $this->view->display($tpl, $dir);
     }
 

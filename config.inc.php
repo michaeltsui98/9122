@@ -1,5 +1,6 @@
 <?php
 $config = array(
+    'site_name'=>'多多文库',
     '_urls' => array(
         '/^view\/?(\d+)?$/' => array(
             'controller' => 'IndexController',
