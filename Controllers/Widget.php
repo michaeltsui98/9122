@@ -13,7 +13,7 @@ class Controllers_Widget extends Cola_Controller
     
     function header(){
         $this->view->a = 'test widget';
-        $this->display('Index/wid');
+        $this->display('widget/header');
     }
     
 }
