@@ -7,8 +7,7 @@ global  $_K;
 $_K ['i'] = 0;
 $_K ['block_search'] = $_K ['block_replace'] = array ();
 define('CHARSET', 'utf-8');
-//模板缓存
-define(TPL_CACHE, 0);
+ 
 class Cola_Tpl {
 	
 	static private  $tpl_path = 'views/tpl_c';

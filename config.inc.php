@@ -43,3 +43,5 @@ $config = array(
     '_viewsHome'       => 'views',
     '_widgetsHome'     => 'widgets'
 );
+//模板缓存
+define('TPL_CACHE', 1);
