@@ -25,20 +25,20 @@ class Tables_Model
     public static $where = NULL;
 
     protected static $_instance = null;
-
-   // protected $_class;
-
+    
+    // protected $_class;
     public function __construct ($tableName = null)
     {
         $model = new Cola_Model();
         self::$db = $model->db();
         $this->tableName = $tableName;
-        //$class = 'Tables_' . $tableName;
+        // $class = 'Tables_' . $tableName;
     }
 
     public static function loadClass ($className)
     {
-        if (class_exists($className, false) || interface_exists($className, false)) {
+        if (class_exists($className, false) ||
+                 interface_exists($className, false)) {
             return true;
         }
         if (strpos($className, 'Tables') !== FALSE) {
@@ -56,9 +56,8 @@ class Tables_Model
      */
     public static function factory ($tableName)
     {
-        
         try {
-            $class = 'Tables_'.$tableName;
+            $class = 'Tables_' . $tableName;
             if (self::$_instance[$tableName] == null) {
                 if (self::loadClass($class)) {
                     self::$_instance[$tableName] = new $class();
@@ -110,8 +109,7 @@ class Tables_Model
     function update ()
     {
         if (! self::$where and isset(self::$pkVal)) {
-            self::$where =self::$pk .'='. self::$pkVal;
-            
+            self::$where = self::$pk . '=' . self::$pkVal;
         }
         $res = static::$db->update(self::$data, self::$where, $this->tableName);
         $this->reset();
@@ -166,39 +164,45 @@ class Tables_Model
             $sql = "select count(*) as count from $this->tableName";
         }
         $this->reset();
-        //die($sql);
+        // die($sql);
         return self::$db->col($sql);
     }
+
     /**
      * 返回一行数据
+     * 
      * @return array
      */
-    function row(){
-        if(self::$where){
-            $sql =  "select * from $this->tableName where " .self::$where;
-        }else{
-            $sql =  "select * from $this->tableName";
+    function row ()
+    {
+        if (self::$where) {
+            $sql = "select * from $this->tableName where " . self::$where;
+        } else {
+            $sql = "select * from $this->tableName";
         }
         $this->reset();
-        return (array)self::$db->row($sql);
+        return (array) self::$db->row($sql);
     }
+
     /**
-     * 单个字段的值 
-     * @param string $filed 可以是字段名，也可以是表达式
+     * 单个字段的值
+     * 
+     * @param string $filed
+     *            可以是字段名，也可以是表达式
      * @return Ambigous <string, NULL, mixed>
      */
-    function col($filed=NULL){
-        $filed OR $filed = '*';
-        if(self::$where){
-            $sql = "select $filed from $this->tableName where ".self::$where;
-        }else{
+    function col ($filed = NULL)
+    {
+        $filed or $filed = '*';
+        if (self::$where) {
+            $sql = "select $filed from $this->tableName where " . self::$where;
+        } else {
             $sql = "select $filed from $this->tableName";
         }
         
         $this->reset();
         return self::$db->col($sql);
     }
-    
 
     function reset ()
     {
@@ -217,6 +221,36 @@ class Tables_Model
             return FALSE;
         }
         return TRUE;
+    }
+    /**
+     * 通过sql  获取数据与分页信息
+     * @param string $sql 不要带limit子句，本方法会依据参数生成 
+     * @param int $page  1
+     * @param int $limit 20 
+     * @param string $url  BASE_PATH."/index.php/Admin_Log/index/page/%page%/fid/$fid/cond/$cond/val/$val";
+     * @return boolean|multitype:string Ambigous <mixed, resource>
+     */
+    public function sql_pager ($sql, $page, $limit, $url)
+    {
+        (int) $page or $page = 1;
+        (int) $limit or $limit = 20;
+        
+        if ($page > 0) {
+            $start = ($page - 1) * $limit;
+            $limits = ' limit ' . $start . ',' . $limit;
+        }
+        $data = $this->db->sql($sql . $limits);
+        $sql = "select count(*) from (" . $sql . ") as sy";
+        $count = $this->db->col($sql);
+        
+        $pager = new Cola_Com_Pager($page, $limit, $count, $url);
+        $html = $pager->html();
+        if (! $data)
+            return false;
+        return array(
+                'data' => $data,
+                'page' => $html
+        );
     }
 }
     

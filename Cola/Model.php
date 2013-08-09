@@ -446,6 +446,17 @@ class Cola_Model
         }
         return " LIMIT " . $start . " ," . $limit;
     }
+    /**
+     * 获取分页数据
+     * @param int $page  当前页
+     * @param int $pageSize  每页数量
+     * @param string $fid   字段名
+     * @param string $cond   <,>,=
+     * @param string $val    字段值
+     * @param string $url    http://www.xx.com/sss
+     * @param string $order   order id desc
+     * @return multitype:array string
+     */
     function dataList ($page = 1, $pageSize = 20, $fid,$cond,$val,$url,$order='')
     {
         $wh = '1';
