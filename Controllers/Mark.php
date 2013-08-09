@@ -1,10 +1,10 @@
 <?php
 /**
- * 首页
+ * 文档互评
  * @author michael
  *
  */
-class Controllers_Index extends Cola_Controller
+class Controllers_User extends Cola_Controller
 {
     /**
      * @var Models_Index
@@ -13,28 +13,17 @@ class Controllers_Index extends Cola_Controller
     
     function __construct(){
         //self::$_model = new Models_Index();
+        //需要判断登录
     }
     /**
-     * 首页
+     * 
      */
     function indexAction(){
         
          
     }
      
-    /**
-     * 登录
-     */
-    function loginAction(){
-        
-    }
-    /**
-     * 退出
-     */
-
-    function outAction(){
-        
-    }
+    
     
     
 }

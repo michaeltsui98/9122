@@ -1,10 +1,10 @@
 <?php
 /**
- * 首页
+ * 文档搜索
  * @author michael
  *
  */
-class Controllers_Index extends Cola_Controller
+class Controllers_Mark extends Cola_Controller
 {
     /**
      * @var Models_Index
@@ -15,26 +15,14 @@ class Controllers_Index extends Cola_Controller
         //self::$_model = new Models_Index();
     }
     /**
-     * 首页
+     * 
      */
     function indexAction(){
         
          
     }
      
-    /**
-     * 登录
-     */
-    function loginAction(){
-        
-    }
-    /**
-     * 退出
-     */
-
-    function outAction(){
-        
-    }
+    
     
     
 }
