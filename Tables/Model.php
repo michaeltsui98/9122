@@ -54,8 +54,11 @@ class Tables_Model
      * @param string $table_name            
      * @return self
      */
-    public static function factory ($tableName)
+    public static function factory ($tableName=null)
     {
+        if($tableName===null){
+            return new Tables_Model();
+        }
         try {
             $class = 'Tables_' . $tableName;
             if (self::$_instance[$tableName] == null) {
@@ -239,9 +242,9 @@ class Tables_Model
             $start = ($page - 1) * $limit;
             $limits = ' limit ' . $start . ',' . $limit;
         }
-        $data = $this->db->sql($sql . $limits);
+        $data = self::$db->sql($sql . $limits);
         $sql = "select count(*) from (" . $sql . ") as sy";
-        $count = $this->db->col($sql);
+        $count = self::$db->col($sql);
         
         $pager = new Cola_Com_Pager($page, $limit, $count, $url);
         $html = $pager->html();

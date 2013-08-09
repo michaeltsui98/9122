@@ -44,11 +44,7 @@ class Controllers_Index extends Cola_Controller
         //$res = $model->testModel();
         
         //var_dump($res);
-        
-        
-        
-       
-        
+         
     }
     function setCacheAction(){
         $res = Cola::cache('test','i love you ',6000);
