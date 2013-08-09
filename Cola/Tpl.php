@@ -253,6 +253,8 @@ class Cola_Tpl {
 	    $cls_name = new $c;
 	    if(method_exists($cls_name, $a)){
 	        return call_user_func(array($cls_name,$a));
+	    }else{
+	        throw new Exception("not fond class $c mothed $a ");
 	    }
 	}
 	/**

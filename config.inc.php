@@ -44,4 +44,4 @@ $config = array(
     '_widgetsHome'     => 'widgets'
 );
 //模板缓存
-define('TPL_CACHE', 1);
+define('TPL_CACHE', 0);
