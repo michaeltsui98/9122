@@ -1,0 +1,11 @@
+<div id="ajaxpage">
+<p>例子一</p>
+<ul>
+	{loop $data['data'] $k $v}
+	<li>
+		{$v['log_msg']}-{$v['user_name']}-{date('Y-m-d',$v['log_time'])}
+	</li>
+	{/loop}
+</ul>
+{$data['page']}
+</div>
