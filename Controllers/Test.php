@@ -20,11 +20,9 @@ class Controllers_Test extends Cola_Controller
     function pagerAction ()
     {
         $this->view->top_title = '分页测试';
-        $sql = "select * from sys_log";
+        $test = new Models_Test();
         $page = $this->getVar('page');
-        $limit = 2;
-        $url = BASE_PATH . '/index.php/Test/pager/page/%page%';
-        $res = Tables_Model::factory()->sql_pager($sql, $page, $limit, $url);
+        $res = $test->pagetest($page);
         $this->view->data = $res;
         $this->display('Index/test','master/test');
     }
