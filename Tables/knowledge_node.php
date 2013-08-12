@@ -2,7 +2,7 @@
  /** 
  * @Copyright Michael 
  * @author Michaeltsui98 
- * @version 3.0 2013/8/9 10:55:25 
+ * @version 3.0 2013/8/12 14:17:34 
  */
 class Tables_knowledge_node  extends Tables_Model {
 		function  __construct(){
@@ -17,6 +17,9 @@ class Tables_knowledge_node  extends Tables_Model {
 		}
 		public function getNode_title(){
 			return self::$_data ['node_title'];
+		}
+		public function getNode_ms(){
+			return self::$_data ['node_ms'];
 		}
 		public function getNode_xueduan(){
 			return self::$_data ['node_xueduan'];
@@ -59,6 +62,10 @@ class Tables_knowledge_node  extends Tables_Model {
 		}
 		public function setNode_title($value){
 			return self::$_data ['node_title'] = $value;
+			$this;
+		}
+		public function setNode_ms($value){
+			return self::$_data ['node_ms'] = $value;
 			$this;
 		}
 		public function setNode_xueduan($value){
