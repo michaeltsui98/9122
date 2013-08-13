@@ -11,7 +11,6 @@ class Models_Test extends Cola_Model
     }
     function pagetest($page){
         $sql = "select * from sys_log";
-         
         $limit = 2;
         $url = BASE_PATH . '/index.php/Test/pager/page/%page%';
         $res = Tables_Model::factory()->sql_pager($sql, $page, $limit, $url);
@@ -71,6 +70,7 @@ class Models_Test extends Cola_Model
     function tableQuery ()
     {
         return Tables_Model::factory('keke_witkey_ad')->query();
+       
     }
 
     function modelCount ()

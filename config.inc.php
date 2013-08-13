@@ -20,14 +20,30 @@ $config = array(
                     )
             )
     ),
+    '_imgFs' => array(
+            'domain' => 'wenku',
+            'class' => 'cover',
+            'trackers' => 'tcp://172.16.0.5:7777'
+    ),
+    '_pdfFs' => array(
+            'domain' => 'wenku',
+            'class' => 'pdf',
+            'trackers' => 'tcp://172.16.0.5:7777'
+    ),
+    '_swfFs' => array(
+            'domain' => 'wenku',
+            'class' => 'flash',
+            'trackers' => 'tcp://172.16.0.5:7777'
+    ),
+     
     '_db' => array(
         'adapter' => 'Mysqli',
         
-            'host' => '127.0.0.1',
+            'host' => '172.16.0.3',
             'port' => 3306,
-            'user' => 'root',
-            'password' => '123456',
-            'database' => 'df',
+            'user' => 'wenku',
+            'password' => 'wenku',
+            'database' => 'dodowenku',
             'charset' => 'utf8',
             'persitent' => false
         

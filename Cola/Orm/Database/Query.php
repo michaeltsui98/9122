@@ -80,9 +80,8 @@ class Orm_Database_Query {
 	 * @param   integer  $lifetime  number of seconds to cache, 0 deletes it from the cache
 	 * @param   boolean  whether or not to execute the query during a cache hit
 	 * @return  $this
-	 * @uses    Kohana::$cache_life
 	 */
-	public function cached($lifetime = NULL, $force = FALSE)
+	public function cached($lifetime = NULL, $force = 1)
 	{
 		if ($lifetime === NULL)
 		{
@@ -231,10 +230,12 @@ class Orm_Database_Query {
 	 */
 	public function execute($db = NULL, $as_object = NULL, $object_params = NULL)
 	{
+	    
 		if ( ! is_object($db))
 		{
 			// Get the database instance
 			$db = Orm_Database::instance($db);
+			 
 		}
 
 		if ($as_object === NULL)
@@ -253,13 +254,15 @@ class Orm_Database_Query {
 		if ($this->_lifetime !== NULL AND $this->_type === Orm_Database::SELECT)
 		{
 			// Set the cache key based on the database instance name and SQL
-			$cache_key = 'Database::query("'.$db.'", "'.$sql.'")';
+			$str_db = Cola::$_config['_db']['database'];
+			$cache_key = 'Database::query("'.$str_db.'", "'.$sql.'")';
             
 			// Read the cache first to delete a possible hit with lifetime <= 0
 			if (($result = Cola::cache($cache_key, NULL, $this->_lifetime)) !== NULL
 				AND ! $this->_force_execute)
 			{
-				// Return a cached result
+				 
+			    // Return a cached result
 				return new Orm_Database_Result_Cached($result, $sql, $as_object, $object_params);
 			}
 		}
@@ -267,11 +270,11 @@ class Orm_Database_Query {
 		// Execute the query
 		$ac = $this->_ac;
 		$result = $db->$ac($sql);
-
-		if (isset($cache_key) AND $this->_lifetime > 0)
+        if (isset($cache_key) AND $this->_lifetime > 0)
 		{
+		   echo $cache_key;
 			// Cache the result array
-			Cola::cache($cache_key, $result->as_array(), $this->_lifetime);
+			Cola::cache($cache_key, $result, $this->_lifetime);
 		}
 		return $result;
 

@@ -1,94 +1,66 @@
 <?php
 
+/**
+ * 文库首页model
+ * @author michael
+ * @version 1.0 2013/8/12 14:17:34 
+ */
 class Models_Index extends Cola_Model
 {
 
-    
-    function set_cache(){
-        
-    }
-    
-    function test ()
+    /**
+     * 获取推荐的文档，取最新的前10个
+     */
+    function get_recommend_doc ()
     {
-        $sql = "select `ad_id` from keke_witkey_ad where ad_id = 292";
-        
-        return $this->db()->col($sql);
-    }
-    function testCache(){
-        return  $this->cached('test');
-    }
-    
-    function testModel(){
-        
-       return  $this->count('ad_id = 292','keke_witkey_ad');
+        $sql = "select doc_id, doc_title,doc_page_key from doc 
+                where recommend =1 
+                order by doc_id desc
+                limit 0,10  ";
+        $key = $this->cache_key('get_recommend');
+        $data = $this->cache()->get($key);
+        if (! $data) {
+            $data = $this->sql($sql);
+            $this->cache()->set($key, $data, 1800);
+        }
+        return $data;
     }
 
-    function orm ()
+    /**
+     * 获取本周，本月，本年， 的文档排行榜
+     * 按下载次数+阅读次数
+     *
+     * @param string $unit
+     *            (week,month,year)
+     * @return array;
+     */
+    function get_top_doc ($unit = 'week')
     {
-        return Orm_DB::select('ad_id')
-            ->from('keke_witkey_ad')
-            ->where('ad_id', '=', 292)
-            
-            ->getCol()
-            ->execute();
+        $sql = "select doc_id,doc_title from doc
+            where DATE_SUB(CURDATE(),INTERVAL 1 $unit) <= DATE(FROM_UNIXTIME(on_time))
+            order by doc_views+doc_downs desc limit 0,10";
+        $key = $this->cache_key('get_top_doc', func_get_args());
+        $data = $this->cache()->get($key);
+        if (! $data) {
+            $data = $this->sql($sql);
+            $this->cache()->set($key, $data, 1800);
+        }
+        return $data;
     }
 
-    function ormDel ()
+    /**
+     * 生成oauth登录的url
+     *
+     * @return string
+     */
+    function getOauthUrl ()
     {
-        return Orm_DB::delete('keke_witkey_ad')->where('ad_id', '=', 236)->execute();
-    }
-
-    function ormUpdate ()
-    {
-        return Orm_DB::update('keke_witkey_ad')->set(array(
-                'ad_type' => 'text'
-        ))
-            ->where('ad_id', '=', 292)
-            ->execute();
-    }
-
-    function ormInsert ()
-    {
-        $data = array(
-                'target_id' => 1,
-                'ad_type' => 'flash'
-        );
-        return Orm_DB::insert('keke_witkey_ad')->columns(array_keys($data))
-            ->values(array_values($data))
-            ->execute();
-    }
-
-    function tableQuery ()
-    {
-        return Tables_Model::factory('keke_witkey_ad')->query();
-    }
-
-    function modelCount ()
-    {
-        return Tables_keke_witkey_ad::instance()->count();
-    }
-
-    function modelInsert ()
-    {
-        return Tables_keke_witkey_ad::instance()->setAd_name('test')
-            ->setAd_type('text')
-            ->setAd_content('content')
-            ->insert();
-    }
-
-    function modelUpdate ()
-    {
-        return Tables_keke_witkey_ad::instance()->setAd_name('update297')
-            ->setAd_content('update_content297')
-            ->setAd_url('www.163.com')
-            ->setWhere('ad_id=297')
-            ->update();
-    }
-
-    function modelDel ()
-    {
-        return Tables_keke_witkey_ad::instance()->setAd_id('296')->del();
+        $refUrl = $_SERVER['HTTP_REFERER'];
+        $_SESSION['refUrl'] = $refUrl;
+        $_SESSION['state'] = md5(uniqid(rand(), TRUE));
+        $DDClient = new Models_DDClient();
+        return $DDClient->getAuthorizeURL(DD_CALLBACK_URL, 'code', 
+                $_SESSION['state']);
     }
 }
-
-?>
+ 

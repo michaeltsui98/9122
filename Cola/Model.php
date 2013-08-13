@@ -130,6 +130,10 @@ class Cola_Model
 
         return $this->_cache;
     }
+    
+    function cache_key($func,$args=array()){
+        return $key = md5(get_class($this) . $func . serialize($args));
+    }
 
     /**
      * Find result
